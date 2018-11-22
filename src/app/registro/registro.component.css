@@ -1,0 +1,12 @@
+#main_registro {
+  background-color: #CCFFCC;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.red-placeholder::-webkit-input-placeholder {
+  color: red;
+}
+.registroImg {
+  width: 100%;
+}

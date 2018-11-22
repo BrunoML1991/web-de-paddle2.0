@@ -1,21 +1,82 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<img id="background" src="https://padeladdict.com/wp-content/uploads/2015/03/portada-airpro-padel.jpg">
+<nav id="nav" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" routerLink="main_page"> <img id="logo" src="../assets/img/logo.gif"> </a>
+  <ul class="navbar-nav">
+    <li id="inicio" class="nav-item"><a class="nav-link" routerLink="main_page">Inicio</a></li>
+    <li id="instalaciones" class="nav-item"><a class="nav-link" routerLink="instalaciones">Instalaciones</a></li>
+    <li id="reservas" class="nav-item"><a class="nav-link" routerLink="">Reservas</a></li>
+  </ul>
+  <div id="right_nav" class="collapse navbar-collapse">
+    <ul class="navbar-nav">
+      <li id="registro" class="nav-item justify-content-end"><a class="nav-link" routerLink="registro">Registro</a></li>
+    </ul>
+    <button id="log-in" type="button" data-toggle="modal" data-target="#modal-in">
+      {{logInOut}}
+    </button>
+  </div>
+</nav>
 
-<router-outlet></router-outlet>
+
+<!-- The Log-In modal -->
+<div class="modal fade" id="modal-in">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Datos de acceso:</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body container">
+        <form>
+          <div class="form-group">
+            <label for="username">Usuario: </label>
+            <input type="text" id="username" class="form-control" required
+                   placeholder="Escriba su nombre de usuario" #user>
+          </div>
+          <div class="form-group">
+            <label for="password">Clave: </label>
+            <input type="password" id="password" class="form-control" required
+                   placeholder="Escriba su contraseña" #password>
+          </div>
+        </form>
+        <p *ngIf="wrongPassworOrUser">*Usuario o contraseña erroneas</p>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="log-in-modal" type="button" class="btn btn-success" (click)="logIn(user.value,password.value)">
+          Entrar
+        </button>
+        <button id="close-modal" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- The Log-Out modal -->
+<div class="modal fade" id="modal-out">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">¿Seguro que desea desconectarse?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="log-out-modal" type="button" class="btn btn-success" (click)="logOut()">Desconectarse</button>
+        <button id="close-modal-out" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="main_page" class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

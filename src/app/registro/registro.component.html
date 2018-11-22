@@ -1,0 +1,42 @@
+<div id="main_registro" class="container-fluid mx-auto col-sm-8 row">
+  <fieldset class="col-sm-6">
+    <legend>Registro de usuario</legend>
+    <form >
+      <div class="form-group">
+        <label for="nombre">Usuario: </label>
+        <input type="text" id="nombre" class="form-control" [(ngModel)]="username" (blur)="isValidUserName()"
+               placeholder="Elija un nombre de usuario" name="username">
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo electronico: </label>
+        <input type="text" id="correo" class="form-control" required
+               placeholder="Escriba su correo electronico">
+      </div>
+      <div class="form-group">
+        <label for="clave">Clave: </label>
+        <input type="password" id="clave" class="form-control" required
+               placeholder="Escriba su clave de acceso">
+      </div>
+      <div class="form-group">
+        <label for="clave2">Repita la clave: </label>
+        <input type="password" id="clave2" class="form-control" required placeholder="Repita la clave">
+      </div>
+      <div class="form-group">
+        <label for="fecha_nac">Fecha de nacimiento: </label>
+        <input type="text" id="fecha_nac" class="form-control" required placeholder="dd/mm/aaaa">
+      </div>
+      <div class="row justify-content-center">
+        <button class="col-sm-3">Registrarse</button>
+      </div>
+    </form>
+  </fieldset>
+  <div class="col-sm-6 text-justify">
+    <h4>Beneficios por registrarse:</h4>
+    <img class="registroImg" src="http://www.somosidealibre.org/wp-content/uploads/2018/06/DSC8253-Copy.jpg">
+    <p>Cumplimenta el formulario de registro para formar parte del mejor club de paddle interuniversitario y llegar
+      a nuevas cotas dentro del club.</p>
+    <p>Haz amigos jugando al paddle, participa en clases grupales y personales. Podrás reservar pistas para jugar
+      con tus compañeros.</p>
+    <p>Y sobretodo diviertete con nosotros.</p>
+  </div>
+</div>
