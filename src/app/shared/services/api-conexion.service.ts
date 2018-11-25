@@ -11,9 +11,10 @@ export class ApiConexionService {
   }
 
   authenticate(user: string, password: string) {
-    return this.http.get(this.baseUrl + '/users/login?username=' + user + '&password=' + password, {observe: 'response'});
+    return this.http.get(this.baseUrl + '/users/login?name=' + user + '&password=' + password, {observe: 'response'});
   }
-  existsUser (username:string){
-    return this.http.get(this.baseUrl+'');
+
+  existsUser(username: string) {
+    return this.http.get(this.baseUrl + '/users/' + username, {observe: 'response'});
   }
 }

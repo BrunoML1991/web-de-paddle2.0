@@ -1,32 +1,38 @@
-<div id="main_registro" class="container-fluid mx-auto col-sm-8 row">
+<div id="main_registro" class="container-fluid mx-auto col-sm-8 row" *ngIf="!isLoggedIn()">
   <fieldset class="col-sm-6">
     <legend>Registro de usuario</legend>
-    <form >
+    <form [formGroup]="registro" novalidate (ngSubmit)="sendData()">
       <div class="form-group">
         <label for="nombre">Usuario: </label>
-        <input type="text" id="nombre" class="form-control" [(ngModel)]="username" (blur)="isValidUserName()"
-               placeholder="Elija un nombre de usuario" name="username">
+        <input type="text" id="nombre" class="form-control" formControlName="username"
+               placeholder="Elija un nombre de usuario">
       </div>
       <div class="form-group">
         <label for="correo">Correo electronico: </label>
-        <input type="text" id="correo" class="form-control" required
+        <input type="text" id="correo" class="form-control" formControlName="email"
                placeholder="Escriba su correo electronico">
+      </div>
+      <div *ngIf="registro.get('email').errors&&registro.get('email').dirty">
+        <p *ngIf="registro.get('email').hasError('required')">*Este campo es obligatorio</p>
+        <p *ngIf="registro.get('email').hasError('email')">*Formato de correo incorrecto</p>
       </div>
       <div class="form-group">
         <label for="clave">Clave: </label>
-        <input type="password" id="clave" class="form-control" required
+        <input type="password" id="clave" class="form-control"
                placeholder="Escriba su clave de acceso">
       </div>
       <div class="form-group">
         <label for="clave2">Repita la clave: </label>
-        <input type="password" id="clave2" class="form-control" required placeholder="Repita la clave">
+        <input type="password" id="clave2" class="form-control" formControlName="password"
+               placeholder="Repita la clave">
       </div>
       <div class="form-group">
         <label for="fecha_nac">Fecha de nacimiento: </label>
-        <input type="text" id="fecha_nac" class="form-control" required placeholder="dd/mm/aaaa">
+        <input type="text" id="fecha_nac" class="form-control" formControlName="birthdate"
+               placeholder="dd/mm/aaaa">
       </div>
       <div class="row justify-content-center">
-        <button class="col-sm-3">Registrarse</button>
+        <button type="submit" [disabled]="registro.invalid" class="col-sm-3">Registrarse</button>
       </div>
     </form>
   </fieldset>
@@ -40,3 +46,4 @@
     <p>Y sobretodo diviertete con nosotros.</p>
   </div>
 </div>
+<p *ngIf="isLoggedIn()" class="backgroundWhite">No puede estar identificado si quiere registrar una cuenta</p>

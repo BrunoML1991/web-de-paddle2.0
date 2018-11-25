@@ -10,3 +10,10 @@
 .registroImg {
   width: 100%;
 }
+.backgroundWhite{
+  background-color: aliceblue;
+  color: red;
+}
+form>div>p{
+  color: red;
+}
