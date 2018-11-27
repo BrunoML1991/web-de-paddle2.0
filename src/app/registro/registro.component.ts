@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiConexionService} from '../shared/services/api-conexion.service';
 import {HttpResponse} from '@angular/common/http';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {matchOtherValidator} from './matchOtherValidator';
 
 declare var jQuery: any;
 
@@ -12,19 +13,17 @@ declare var jQuery: any;
 })
 export class RegistroComponent implements OnInit {
 
-  name: string;
-  clave1: string;
-  clave2: string;
-  registro: FormGroup;
-
   constructor(public api: ApiConexionService, public fb: FormBuilder) {
     this.registro = this.fb.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      passwordRegistro: ['', Validators.required],
+      confirmPassword: ['', [Validators.required, matchOtherValidator('passwordRegistro')]],
       birthdate: ['']
     });
   }
+
+  registro: FormGroup;
 
   sendData() {
     console.log(this.registro.value);
@@ -43,13 +42,6 @@ export class RegistroComponent implements OnInit {
     } else {
       return null;
     }*/
-  }
-
-  isValidPassword() {
-    if (this.clave1 === this.clave2) {
-      return null;
-    } else {
-    }
   }
 
   isLoggedIn() {
