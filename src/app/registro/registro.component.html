@@ -1,38 +1,51 @@
 <div id="main_registro" class="container-fluid mx-auto col-sm-8 row" *ngIf="!isLoggedIn()">
   <fieldset class="col-sm-6">
     <legend>Registro de usuario</legend>
-    <form [formGroup]="registro" novalidate (ngSubmit)="sendData()">
+    <form novalidate (ngSubmit)="sendData()">
       <div class="form-group">
         <label for="nombre">Usuario: </label>
-        <input type="text" id="nombre" class="form-control" formControlName="username"
-               placeholder="Elija un nombre de usuario">
+        <input type="text" id="nombre" class="form-control" [(ngModel)]="user.username" name="username" maxlength="8"
+               placeholder="Elija un nombre de usuario" (blur)="isValidUserName()">
+        <div *ngIf="validUserName">
+          <p>*Usuario no válido, introduzca otro nombre de usuario porfavor</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="correo">Correo electronico: </label>
-        <input type="text" id="correo" class="form-control" formControlName="email"
+        <input type="text" id="correo" class="form-control" [(ngModel)]="user.email" name="email" (blur)="isValidEmail()"
                placeholder="Escriba su correo electronico">
-      </div>
-      <div *ngIf="registro.get('email').errors&&registro.get('email').dirty">
-        <p *ngIf="registro.get('email').hasError('required')">*Este campo es obligatorio</p>
-        <p *ngIf="registro.get('email').hasError('email')">*Formato de correo incorrecto</p>
+        <div *ngIf="!validEmail">
+          <p>*Formato de correo incorrecto</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="clave">Clave: </label>
-        <input type="password" id="clave" class="form-control"
+        <input type="password" id="clave" class="form-control" [(ngModel)]="clave1" name="clave"
                placeholder="Escriba su clave de acceso">
       </div>
       <div class="form-group">
         <label for="clave2">Repita la clave: </label>
-        <input type="password" id="clave2" class="form-control" formControlName="password"
+        <input type="password" id="clave2" class="form-control" [(ngModel)]="user.password" name="clave2" (blur)="isValidPassword()"
                placeholder="Repita la clave">
+        <div *ngIf="!validClave">
+          <p>*Las claves no coinciden</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="fecha_nac">Fecha de nacimiento: </label>
-        <input type="text" id="fecha_nac" class="form-control" formControlName="birthdate"
-               placeholder="dd/mm/aaaa">
+        <input type="text" id="fecha_nac" class="form-control" [matDatepicker]="fecha" class="col-sm-10" [(ngModel)]="birthdate"
+               placeholder="mm/dd/aaaa" name="birthdate">
+        <mat-datepicker-toggle matSuffix [for]="fecha" class="col-sm-2"></mat-datepicker-toggle>
+        <mat-datepicker #fecha></mat-datepicker>
       </div>
       <div class="row justify-content-center">
-        <button type="submit" [disabled]="registro.invalid" class="col-sm-3">Registrarse</button>
+        <button type="submit" class="col-sm-3">Registrarse</button>
+      </div>
+      <div *ngIf="validSubmit">
+        <p class="color-red">*Rellene los campos correctamente</p>
+      </div>
+      <div *ngIf="true">
+        <p class="color-green">Usuario registrado correctamente</p>
       </div>
     </form>
   </fieldset>

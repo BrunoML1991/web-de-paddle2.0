@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiConexionService} from '../shared/services/api-conexion.service';
 import {HttpResponse} from '@angular/common/http';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {User} from '../shared/models/user.model';
 
 declare var jQuery: any;
 
@@ -12,44 +12,63 @@ declare var jQuery: any;
 })
 export class RegistroComponent implements OnInit {
 
-  name: string;
+  user: User;
+  validUserName: boolean;
+  validEmail = true;
   clave1: string;
-  clave2: string;
-  registro: FormGroup;
+  validClave = true;
+  validSubmit = false;
+  birthdate;
+  usuarioRegistrado = false;
 
-  constructor(public api: ApiConexionService, public fb: FormBuilder) {
-    this.registro = this.fb.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      birthdate: ['']
-    });
+  constructor(public api: ApiConexionService) {
   }
 
   sendData() {
-    console.log(this.registro.value);
+    this.assignBirthdate();
+    this.validSubmit = false;
+    this.usuarioRegistrado = false;
+    if (this.validUserName || !this.validEmail || !this.validClave || this.validUserName === undefined) {
+      this.validSubmit = true;
+    } else {
+      this.api.postUser(this.user).subscribe(() => {
+        this.user = new User();
+        this.clave1 = '';
+        this.birthdate = null;
+        this.usuarioRegistrado = true;
+      }, error1 => {
+        alert('Ha fallado la subida de usuario, intentelo de nuevo');
+      });
+    }
   }
 
   ngOnInit() {
+    this.user = new User();
+    this.user.birthdate = null;
   }
 
-  isValidUserName(control: AbstractControl) {
-    /*if (control.value != null || typeof control.value === 'string' && control.value.length !== 0) {
-      this.api.existsUser(control.value).subscribe((response: HttpResponse<any>) => {
-        return {'nameExists': true};
+  isValidUserName() {
+    if (this.user.username !== undefined && this.user.username !== '') {
+      this.api.existsUser(this.user.username).subscribe((response: HttpResponse<any>) => {
+        this.validUserName = true;
       }, error => {
-        return null;
+        this.validUserName = false;
       });
     } else {
-      return null;
-    }*/
+      this.validUserName = true;
+    }
+  }
+
+  isValidEmail() {
+    this.validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(this.user.email);
   }
 
   isValidPassword() {
-    if (this.clave1 === this.clave2) {
-      return null;
-    } else {
-    }
+    this.validClave = this.clave1 === this.user.password;
+  }
+
+  assignBirthdate() {
+    this.user.birthdate = new Date(this.birthdate).getTime();
   }
 
   isLoggedIn() {

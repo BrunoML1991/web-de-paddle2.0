@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class ApiConexionService {
 
   existsUser(username: string) {
     return this.http.get(this.baseUrl + '/users/' + username, {observe: 'response'});
+  }
+
+  postUser(user: User) {
+    return this.http.post(this.baseUrl + '/users/', user);
   }
 }

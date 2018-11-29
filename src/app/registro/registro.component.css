@@ -4,9 +4,6 @@
   border-radius: 15px;
 }
 
-.red-placeholder::-webkit-input-placeholder {
-  color: red;
-}
 .registroImg {
   width: 100%;
 }
@@ -14,6 +11,12 @@
   background-color: aliceblue;
   color: red;
 }
-form>div>p{
+form>div>div>p{
   color: red;
+}
+.color-red{
+  color: red;
+}
+.color-green{
+  color: darkgreen;
 }
