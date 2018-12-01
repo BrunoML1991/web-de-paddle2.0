@@ -1,0 +1,33 @@
+<div id="main_reservas" class="col-sm-8 mx-auto backgroundWhite" *ngIf="isLoggedIn()">
+  <h1 class="center-title">Reservas</h1>
+  <div class="form-group">
+    <label for="fecha_res">Fecha para la reserva: </label>
+    <div class="row anti-row">
+      <input type="text" id="fecha_res" class="form-control col-sm-3" [matDatepicker]="fecha"
+             (blur)="reservasTable=false"
+             [(ngModel)]="fechaReservas" placeholder="mm/dd/aaaa" name="birthdate" [min]="minDate">
+      <mat-datepicker-toggle matSuffix [for]="fecha" class="col-sm-2"></mat-datepicker-toggle>
+      <mat-datepicker #fecha></mat-datepicker>
+      <button (click)="getReservas()">Disponibilidad</button>
+    </div>
+  </div>
+  <h4 id="reservaRealizada" *ngIf="reservaRealizada">*Reserva realizada correctamente</h4>
+  <p class="error">{{errorReserva}}</p>
+  <div>
+    <table class="col-sm-12" *ngIf="reservasTable">
+      <tr>
+        <td><h5>Pista/Hora</h5></td>
+        <td *ngFor="let pista of pistas"><h5>Pista {{pista}}</h5></td>
+      </tr>
+      <tr *ngFor="let hora of horas">
+        <td><h5>{{hora}}:00-{{hora+1}}:00</h5></td>
+        <td *ngFor="let pista of pistas">
+          <button [disabled]="isReservado(pista,hora)" (click)="reservar(pista,hora)">Reservar hora</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div *ngIf="!isLoggedIn()">
+  <p class="backgroundWhite">Debe estar autenticado para acceder a este contenido</p>
+</div>

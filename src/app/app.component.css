@@ -1,0 +1,35 @@
+img#background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+#logo {
+  width: 40px;
+  height: 50px;
+}
+
+#main_page {
+  position: absolute;
+  z-index: 10;
+  margin-top: 90px;
+}
+
+#log-in {
+  color: #979a9b;
+  background-color: #343a40;
+  border: black;
+}
+
+#droppable {
+  height: 100px;
+}
+#right_nav{
+  margin-left: 70%;
+}
+div>p{
+  color: red;
+}

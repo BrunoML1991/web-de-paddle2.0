@@ -1,0 +1,22 @@
+#main_registro {
+  background-color: #CCFFCC;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.registroImg {
+  width: 100%;
+}
+.backgroundWhite{
+  background-color: aliceblue;
+  color: red;
+}
+form>div>div>p{
+  color: red;
+}
+.color-red{
+  color: red;
+}
+.color-green{
+  color: darkgreen;
+}

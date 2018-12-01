@@ -1,0 +1,31 @@
+#pista_padel {
+  height: 385px;
+  width: 900px;
+  border-radius: 15px;
+  background-image: url("../../assets/img/pista_padel.jpg");
+  padding: 20px;
+  margin: 0 auto;
+}
+
+#etsisi_logo {
+  height: 200px;
+  width: 200px;
+}
+
+#paddle_text {
+  margin-top: 50px;
+  color: aliceblue;
+  font-size: large;
+}
+
+.text_back {
+  background-color: white;
+}
+
+article > h4 {
+  border-radius: 5px;
+}
+
+#main_text {
+  margin: 15px;
+}
