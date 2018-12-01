@@ -52,13 +52,15 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import 'hammerjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReservasComponent } from './reservas/reservas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     InstalacionesComponent,
-    RegistroComponent
+    RegistroComponent,
+    ReservasComponent
   ],
   imports: [
     BrowserModule,

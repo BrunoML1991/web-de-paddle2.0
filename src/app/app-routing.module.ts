@@ -4,11 +4,13 @@ import {Routes, RouterModule} from '@angular/router';
 import {MainPageComponent} from './main-page/main-page.component';
 import {InstalacionesComponent} from './instalaciones/instalaciones.component';
 import {RegistroComponent} from './registro/registro.component';
+import {ReservasComponent} from './reservas/reservas.component';
 
 const routes: Routes = [
   {path: 'main_page', component: MainPageComponent},
   {path: 'instalaciones', component: InstalacionesComponent},
   {path: 'registro', component: RegistroComponent},
+  {path: 'reservas', component: ReservasComponent},
   {path: '', redirectTo: 'main_page', pathMatch: 'full'}
 ];
 

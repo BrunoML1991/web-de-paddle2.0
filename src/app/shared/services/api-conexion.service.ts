@@ -12,7 +12,7 @@ export class ApiConexionService {
   }
 
   authenticate(user: string, password: string) {
-    return this.http.get(this.baseUrl + '/users/login?name=' + user + '&password=' + password, {observe: 'response'});
+    return this.http.get(this.baseUrl + '/users/login?username=' + user + '&password=' + password, {observe: 'response'});
   }
 
   existsUser(username: string) {
@@ -22,4 +22,18 @@ export class ApiConexionService {
   postUser(user: User) {
     return this.http.post(this.baseUrl + '/users/', user);
   }
+
+  getReservasForDate(date: number) {
+    return this.http.get(this.baseUrl + '/reservations/' + date, {observe: 'response', headers: this.setAuthorizationHeader()});
+  }
+
+  postReservation(courtid: number, rsvdatetime: number) {
+    return this.http.post(this.baseUrl + '/reservations', {courtid: courtid, rsvdatetime: rsvdatetime},
+      {headers: this.setAuthorizationHeader()});
+  }
+
+  setAuthorizationHeader() {
+    return new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
+  }
+
 }

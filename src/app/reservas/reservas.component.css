@@ -1,0 +1,31 @@
+#main_reservas {
+  padding-bottom: 50px;
+}
+
+.backgroundWhite {
+  background: aliceblue
+}
+
+.center-title {
+  padding: 1em 3em;
+  margin: 1em 25%;
+}
+
+.anti-row {
+  margin: 0px;
+}
+
+table {
+  text-align: center;
+}
+
+button:disabled {
+  color: red;
+}
+
+#reservaRealizada {
+  color: green;
+}
+.error{
+  color: red;
+}
